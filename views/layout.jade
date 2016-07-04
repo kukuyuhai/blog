@@ -1,0 +1,42 @@
+doctype html
+html(lang='zh-CN')
+  head
+    title= title
+    meta(charset='utf-8')
+
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet',href='/stylesheets/bootstrap.min.css')
+  body
+    header.main-header
+      div.container
+        div.menu-container
+          div.logo
+            a(href="#").header-logo
+              img(src="/images/sb-logo.png" alt="logo" width="50px" height="58px")
+          div.nav
+            a.menu-bar.exit(href="#")
+              span.ham
+            nav
+              ul
+                li.menu-item 
+                  a(href="/") 首页
+                li.menu-item 
+                  a(href="/blog") 个人博客
+                li.menu-item 
+                  a(href="#") 联系我
+                li.menu-item 
+                  a(href="#") 最新项目
+    block content
+    footer
+      div.link-address
+        div.weixin
+          a(href="#",style="width:64px;")
+            img(src="")
+        div.github
+        div.weibo
+      div.copyright
+        span powered by 
+          a(href="http://www.scottbrown.co.nz" target="_blank") www.scottbrown.co.nz 
+        span copyright @ 2016 by kukuyuhai 
+    script(type="text/script" src='/javascripts/jquery.min.js')
+    script(type="text/script" src='/javascripts/bootstrap.min.js')

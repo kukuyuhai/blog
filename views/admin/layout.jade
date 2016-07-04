@@ -1,0 +1,49 @@
+//
+   Created by kukuyuhai on 16/6/30.
+doctype html
+html(lang='zh-CN')
+    head
+        title= title
+        meta(charset='utf-8')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet',href='/stylesheets/bootstrap.min.css')
+    body
+        header.header.white-bg
+            div.slidebar-toggle-box
+                div(data-toggle="tooltip" data-placement="right" data-original-title = "Blog").icon-reorder.tooltips
+            a.logo kuku
+                span yuhai
+            div.top-nav
+                ul.pull-right.top-menu
+                    li.nav.pull-right.top-menu
+                        a
+                            span.classname Admin
+                        a(href="#").exit
+                            span.usename 登出
+
+        aside
+            div.sidebar.nav-collaspe.collapse.in
+                ul.sidebar-menu
+                    li
+                        a(href="#")
+                            i.glyphicon.glyphicon-dashboard
+                            |仪表盘
+                    li.sub-menu
+                        a(href="javascript:;")
+                            i.glyphicon.glyphicon-pencil
+                            span 文章
+                        ul
+                            li.childmenu
+                                a(href="#") 所有文章
+                                a(href="#") 写文章
+                                a(href="#") 分类目录
+                                a(href="#") 标签
+                    li.sub-menu
+                        a(href="javascript:;")
+                            i.glyphicon.glyphicon-paperclip
+                            span 评论
+                    li.sub-menu
+                        a(href="javascript:;")
+                            i.glyphicon.glyphicon-user
+                            span 用户
+        block content

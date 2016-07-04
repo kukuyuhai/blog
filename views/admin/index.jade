@@ -1,0 +1,56 @@
+extends layout
+
+block content
+    div.main-container
+        div.container
+            div.col-md-6.col-sm-6
+                div.blog-admin-summary
+                    div.blog-admin-summary-title
+                        span 概括
+                    div.blog-admin-summary-content
+                        div.row
+                            div.col-md-6
+                                a(href="#")
+                                    span 7
+                                    |篇文章
+                            div.col-md-6
+                                a(href="#")
+                                    span 7
+                                    |个页面
+                            div.col-md-6
+                                a(href="#")
+                                    span 8
+                                    |条评论
+                            div.col-md-6
+                                a(href="#")
+                                    span 7
+                                    |分类目录
+                            div.col-md-6
+                                a(href="#")
+                                    span 7
+                                |标签
+                div.blog-admin-commit
+                    div.blog-admin-commit-title
+                        span 评论
+                    div.blog-admin-commit-content
+                        p 待开发中！@__@
+
+            div.col-md-6.col-sm-6
+                div.blog-admin-quick-title
+                    span 快速发布
+                div.blog-admin-quick-content
+                    div.quicksend
+                        div.form-group
+                            label(for="pagetitle") 标题
+                            input(type="text" placeholder="请输入标题").form-control
+                        div.form-group
+                            label(for="pagetitle") 标签
+                            input(type="text" placeholder="请定义你的标签").form-control
+                        div.form-group
+                            label(for="pagetitle") 分类
+                            input(type="text" placeholder="分类").form-control
+                        div.form-group
+                            label(for="") 文章
+                            textarea(rows="10").form-control
+                        div.form-group
+                            a(href="#").form-control.btn.btn-info 发布
