@@ -3,8 +3,10 @@
  */
 
 var Index = require('../controller/index');
+var blog = require('../controller/blog');
 
 module.exports = function(app){
-    app.get('/',Index.index)
+    app.get('/',Index.index);
+    app.get('/blog',blog.blog)
 
-}
+};
