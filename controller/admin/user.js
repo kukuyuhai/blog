@@ -2,26 +2,27 @@
  * Created by kukuyuhai on 16/7/4.
  */
 var mongoose = require('mongoose');
-var user = mongoose.model('user');
+var User = require('../../models/user.js');
 
 
 exports.showSignin = function(req,res) {
-    res.render('signin',{
-        title: '注册页面'
+    res.render('admin/signin',{
+        title: '登录页面'
     })
 };
 
 exports.showSignup = function(req,res) {
-    res.render('signUp', {
-        title: '登录页面'
+    res.render('admin/signUp', {
+        title: '注册页面'
     })
 }
 
-exports.signin = function(req,res){
-    res.render('/admin/signin')
-};
+
 exports.signup  = function(req,res) {
-    var _user = req.body.user
+
+
+    var _user = req.body.user;
+    console.log(_user);
 
     User.findOne({name:_user.name},function(err,user){
         if(err) console.log(err)
@@ -39,7 +40,7 @@ exports.signup  = function(req,res) {
     })
 }
 
-exports.signup = function(req,res) {
+exports.signin = function(req,res) {
     var _user = req.body.user;
     var name = _user.name;
     var password = _user.password;
@@ -54,10 +55,10 @@ exports.signup = function(req,res) {
         }
 //        比较密码是否匹配
         user.comparePassword(password,function(err,isMatch){
-              if(err) console,log(err)
+              if(err) console.log(err)
               if (isMatch) {
                   req.session.user  = user;
-                  return res.redirect('/')
+                  return res.redirect('/blog')
               }else{
                   return res.redirect('/signin');
               }
@@ -87,7 +88,7 @@ exports.userlist = function(req,res){
 
 //middleware for user
 exports.signinRequired = function(req,res,next) {
-     var user = req.session.user
+    var user = req.session.user
 
     if(!user) {
         return res.redirect('/admin/signin')
@@ -96,7 +97,7 @@ exports.signinRequired = function(req,res,next) {
 }
 
 exports.adminRequired = function(req,res,next){
-    var user = req.session.user
+    var user = req.session.user;
 
     if(user.role <= 10) {
         return res.redirect('/admin/signin')
