@@ -1,0 +1,52 @@
+//
+   Created by kukuyuhai on 16/7/7.
+
+extends layout
+block content
+    .main-container
+        .container
+            div.table-header
+                h3 用户列表
+                a(href="javascript:;",data-toggle="modal",data-target="#myModal") 创建新用户
+            table.table.table-bordered
+                thead
+                    tr
+                        th 用户名
+                        th 创建时间
+                        th 权限等级
+                        th 修改密码
+                        th 删除
+                tbody
+                    each item in users
+                        tr(class="item-id-#{item._id}")
+                            td #{item.name}
+                            td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
+                            td #{item.role}
+                            //－td: a(target="_blank",href="../#{item._id}") 查看
+                            td: a(target="_blank",href="../admin/update/#{item._id}") 修改
+                            td
+                                button.btn.btn-danger.del(type="button",data-id="#{item._id}") 删除
+        #myModal.modal.fade(tabindex='-1',role='dialog',aria-labelledby='myModalLabel')
+            .modal-dialog(role='document')
+                .modal-content
+                    form(method="POST",action="/user/signup")
+                        .modal-header
+                            button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                span(aria-hidden='true') ×
+                            h4#myModalLabel.modal-title 添加新用户
+                        .modal-body
+                                .form-group
+                                    label 用户名
+                                    input(type="text",name="user[name]").form-control
+                                .form-group
+                                    label 输入密码
+                                    input(type="password",name="user[password]").form-control
+                                .form-group
+                                    label 再次输入密码
+                                    input(type="password",name="user[newpassword]").form-control
+                                .form-group
+                                    label 权限管理（0:普通用户；30:管理员权限）
+                                    input(type="text",name="user[role]").form-control
+                        .modal-footer
+                            button.btn.btn-default(type='button', data-dismiss='modal') 关闭
+                            button.btn.btn-primary(type='submit') 提交

@@ -1,0 +1,43 @@
+//
+   Created by kukuyuhai on 16/7/11.
+extends layout
+block content
+    div.main-container
+        .container
+            form.form-horizontal(method="post",action="/admin/blog/post",enctype="multipart/form-data")
+                div.blog-admin-quick-title
+                    span 快速发布
+                div.blog-admin-quick-content
+                    .form-group
+                        label.col-md-1.control-label(for="inputTitle") 文章标题
+                        .col-md-10
+                            input#inputTitle.form-control(type="text",name="blog[title]",value=blog.title)
+                    .form-group
+                        label.col-md-1.control-label(for="inputCategory") 博客分类
+                        .col-md-10
+                            input#inputCategory.form-control(type="text",name="blog[categoryName]",value=blog.categroyName)
+                    .form-group
+                        label.col-md-1.control-label 分类选择
+                        each cat in categories
+                            label.radio-inline
+                                input(type="radio",name="blog[category]",value=cat._id)
+                                |   #{cat.name}
+                    .form-group
+                        label.col-md-1.control-label(for="") 内容概括
+                        .col-md-10
+                            textarea.form-control(type="text",name="blog[sunmary]")= blog.sunmary
+                    .form-group
+                        label.col-md-1.control-label(form="") 文章图片
+                        .col-md-10
+                            input.form-control(type="text",name="blog[poster]",value=blog.poster)
+                    .form-group
+                        label.col-md-1.control-label 点击上传
+                        .col-md-10
+                            input.form-control(type="file",name="inputFile",mulitiple="multiple")
+                    .form-group
+                        label.col-md-1.control-label(for="inputContent") 文章内容
+                        .col-md-10
+                            textarea.form-control(type="text",rows="20",name="blog[content]")= blog.content
+                    .form-group
+                        .col-md-offset-1.col-md-10
+                            button.btn.btn-danger(type="submit") 录入

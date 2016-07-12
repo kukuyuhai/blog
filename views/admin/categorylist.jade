@@ -1,0 +1,42 @@
+//
+   Created by kukuyuhai on 16/7/8.
+
+extends layout
+block content
+    div.main-container
+        .container
+            div.table-header
+                h3 分类列表
+                a(href="javascript:;",data-toggle="modal",data-target="#myModal") 创建新分类
+            table.table.table-bordered
+                thead
+                    tr
+                        th 名称
+                        th 创建时间
+                        th 查看
+                        th 修改
+                        th 删除
+                tbody
+                    each item in categories
+                        tr(class="item-id-#{item._id}")
+                            td #{item.name}
+                            td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
+                            td: a(target="_blank",href="../#{item._id}") 查看
+                            td: a(target="_blank",href="../admin/update/#{item._id}") 修改
+                            td
+                                button.btn.btn-danger.del(type="button",data-id="#{item._id}") 删除
+        #myModal.modal.fade(tabindex='-1',role='dialog',aria-labelledby='myModalLabel')
+            .modal-dialog(role='document')
+                .modal-content
+                    form(method="POST",action="/admin/category/new")
+                        .modal-header
+                            button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                span(aria-hidden='true') ×
+                            h4#myModalLabel.modal-title 添加新分类
+                        .modal-body
+                            .form-group
+                                label 用户名
+                                input(type="text",name="category[name]").form-control
+                        .modal-footer
+                            button.btn.btn-default(type='button', data-dismiss='modal') 关闭
+                            button.btn.btn-primary(type='submit') 录入

@@ -5,6 +5,19 @@ body a:hover,body a{
 	color: #333;
 	text-decoration: none;
 }
+a{
+    cursor:pointer;
+    text-decoration:none;
+    hide-focus: expression(this.hideFocus=true);
+    outline:none;
+}
+
+a:link,a:visited,a:hover,a:active{
+     text-decoration:none;
+}
+a:focus{
+      outline:0;
+}
 /*.nav ul li a:after {
     content: '';
 	overflow: hidden;
@@ -415,7 +428,7 @@ ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus{
 }
 
 .main-container{
-    padding-top: 70px;
+    padding-top: 90px;
     margin-left: 180px;
 }
 
@@ -449,4 +462,54 @@ ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus{
 }
 .blog-admin-summary-content a span{
     color: #ff3800;
+}
+
+
+/*//login*/
+
+html,body{height: 100%;}
+.login-bg{
+    height: 100%;
+    background-color: #1b6d85;
+    opacity: 0.7;
+    -ms-filter: alpha(opacity=70);
+    filter: alpha(opacity=70);
+}
+.signin-container{
+    margin-top: 200px;
+    background-color: #ffffff;
+    height: 450px;
+}
+.form-control1{
+    border: 1px solid #1b6d85 !important;
+    outline-color: #000000;
+}
+.form-group{
+    margin-top:20px;
+}
+.modal-foot{
+    padding: 30px 0;
+    font-size: 24px;
+
+}
+.remmberSecret{
+    margin-left: 15px;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+    vertical-align: middle;
+}
+.table-header h3{
+    display: inline-block;
+}
+.table-header a{
+    margin-top: 14px;
+    font-size: 16px;
+    float: right;
+    padding: 6px 20px;
+    border: 1px solid #444444;
+    color: #444444;
+}
+.table-header a:hover{
+    background-color: #444444;
+    color: #ffffff;
 }

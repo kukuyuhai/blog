@@ -1,7 +1,7 @@
 /**
  * Created by kukuyuhai on 16/7/4.
  */
-var mongoose = require('mongoose');
+
 var User = require('../../models/user.js');
 
 
@@ -19,21 +19,25 @@ exports.showSignup = function(req,res) {
 
 
 exports.signup  = function(req,res) {
-
-
     var _user = req.body.user;
-    console.log(_user);
+    var newUser = {
+        name:_user.name,
+        password:_user.password,
+        role:_user.role
+    }
+    console.log(newUser);
 
     User.findOne({name:_user.name},function(err,user){
         if(err) console.log(err)
         if(user){
-            return res.redirect('/')
+            alert("此账号已存在")
+            return res.redirect('/admin/sign')
+
         }else{
-            user = new User(_user)
+            user = new User(newUser)
             user.save(function(err,user){
                 if (err) console.log(err)
-
-                res.redirect('/')
+                res.redirect('/admin/userlist')
             })
 
         }
@@ -44,23 +48,23 @@ exports.signin = function(req,res) {
     var _user = req.body.user;
     var name = _user.name;
     var password = _user.password;
-
     User.findOne({name:name},function(err,user){
         if(err) {
             console.log(err)
         }
         //判断user是否存在，如果不存在跳转到注册页面
         if(!user) {
-            return res.redirect('/admin/signup');
+            return res.redirect('/admin/signin');
         }
 //        比较密码是否匹配
         user.comparePassword(password,function(err,isMatch){
               if(err) console.log(err)
               if (isMatch) {
                   req.session.user  = user;
-                  return res.redirect('/blog')
+                  console.log(user)
+                  return res.redirect('/admin/index');
               }else{
-                  return res.redirect('/signin');
+                  return res.redirect('/admin/signin');
               }
         })
     })
@@ -68,22 +72,40 @@ exports.signin = function(req,res) {
 
 exports.layout = function(req,res){
     delete req.session.user
-    res.redirect('/admin/signin')
+    res.redirect('/admin/signin');
 }
 
 
 //userlist
 
 exports.userlist = function(req,res){
+    var user = req.session.user;
     User.fetch(function(err,users) {
         if (err) {
             console.log(err)
         }
-        res.render('userlist',{
+        res.render('admin/userlist',{
             title:'用户列表',
-            users:users
+            users:users,
+            name:user.name
         })
     })
+}
+
+
+exports.deleteUser = function(req,res){
+    var id = req.query.id;
+    if(id) {
+        User.remove({_id:id},function(err,user){
+            if(err) {
+                console.log(err)
+                res.json({success:0})
+            }else{
+                res.json({success:1})
+            }
+
+        })
+    }
 }
 
 //middleware for user
@@ -99,9 +121,9 @@ exports.signinRequired = function(req,res,next) {
 exports.adminRequired = function(req,res,next){
     var user = req.session.user;
 
-    if(user.role <= 10) {
-        return res.redirect('/admin/signin')
-    }
+//    if(user.role < 30 && user.role > 0) {
+//        return res.redirect('/admin/signin')
+//    }
 
     next()
 }
