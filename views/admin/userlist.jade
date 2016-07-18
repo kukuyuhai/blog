@@ -20,7 +20,7 @@ block content
                     each item in users
                         tr(class="item-id-#{item._id}")
                             td #{item.name}
-                            td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
+                            td #{moment(item.meta.createAt).format('MM/DD/YYYY')}
                             td #{item.role}
                             //－td: a(target="_blank",href="../#{item._id}") 查看
                             td: a(target="_blank",href="../admin/update/#{item._id}") 修改

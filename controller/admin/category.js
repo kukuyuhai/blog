@@ -3,6 +3,7 @@
  */
 
 var Category = require('../../models/category.js');
+var Blog = require('../../models/blog.js');
 
 
 exports.save = function(req,res){
@@ -19,7 +20,7 @@ exports.save = function(req,res){
 }
 
 exports.list = function(req,res){
-    var name = req.session.user.name;
+     var name = req.session.user.name;
      Category.fetch(function(err,categories){
          if(err){
              console.log(err)
@@ -32,3 +33,24 @@ exports.list = function(req,res){
          })
      })
 }
+
+exports.del = function(req,res){
+    var id = req.query.id;
+    if(id) {
+        Blog.remove({category:id},function(err,blog){
+            if(err) console.log(err)
+        })
+        Category.remove({_id:id},function(err,category){
+            if(err) {
+                console.log(err)
+                res.json({success:0})
+            }else{
+                res.json({success:1})
+            }
+        })
+
+    }
+
+}
+
+

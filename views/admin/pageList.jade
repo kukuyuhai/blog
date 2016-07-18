@@ -1,4 +1,29 @@
-//
-   Created by kukuyuhai on 16/6/30.
-
-
+extends layout
+block content
+    div.main-container
+        .container
+            div.table-header
+                h3 文章列表
+            table.table.table-bordered
+                thead
+                    tr
+                        th 文章标题
+                        th 文章分类
+                        th 图片地址
+                        th 浏览统计
+                        th 创建时间
+                        th 查看
+                        th 修改
+                        th 删除
+                tbody
+                    each item in blogs
+                            tr(class="item-id-#{item._id}")
+                                td #{item.title}
+                                td #{item.category.name}
+                                td #{item.poster}
+                                td #{item.pv}
+                                td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
+                                td: a(target="_blank",href="../#{item._id}") 查看
+                                td: a(target="_blank",href="../admin/blog/update/#{item._id}") 修改
+                                td
+                                    button.btn.btn-danger.delete(type="button",data-id="#{item._id}") 删除

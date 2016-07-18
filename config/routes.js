@@ -30,17 +30,23 @@ module.exports = function(app){
 
     //   admin index render
     app.get('/admin/index',User.signinRequired,adminIndex.adminIndex);
-    app.get('/admin/userlist',User.signinRequired,User.adminRequired,User.userlist);
+    app.get('/admin/userList',User.signinRequired,User.adminRequired,User.userlist);
     app.delete('/admin/user/list',User.signinRequired,User.adminRequired,User.deleteUser);
 
 
     // category
     app.get('/admin/category',User.signinRequired,User.adminRequired,Category.list);
-    app.post('/admin/category/new',User.signinRequired,User.adminRequired,Category.save)
+    app.post('/admin/category/new',User.signinRequired,User.adminRequired,Category.save);
+    app.delete('/admin/category/list',User.signinRequired,User.adminRequired,Category.del);
 
     //blog
-    app.get('/admin/blogpost',User.signinRequired,User.adminRequired,Blog.new);
-    app.post('/admin/blog/post',User.signinRequired,User.adminRequired,Blog.savePoster,Blog.save)
+    app.get('/admin/blogPost',User.signinRequired,User.adminRequired,Blog.new);
+    app.get('/admin/pageList',User.signinRequired,User.adminRequired,Blog.list);
+    app.post('/admin/blog/post',User.signinRequired,Blog.savePoster,Blog.save);
+    app.delete('/admin/blog/list',User.signinRequired,User.adminRequired,Blog.del);
+    app.get('/blog',Blog.blog);
+    app.get('/admin/blog/update/:id',User.signinRequired,User.adminRequired,Blog.update);
+    app.get('/blog/:id',Blog.detail);
     app.get('/layout',User.layout)
 
 };

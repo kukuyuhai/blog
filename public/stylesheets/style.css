@@ -282,10 +282,13 @@ footer{
 	margin: 10px 0;
 	display: inline-block;
 }
-/*.main-content .post-para-blog{
+.main-content .post-para-blog{
 	border-bottom:2px solid #333;
-}*/
-
+    margin-bottom: 10px;
+}
+.blog-show-img img{
+    width:100%;
+}
 
 
 
